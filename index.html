@@ -170,7 +170,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -180,7 +180,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -223,6 +223,107 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/19/Android-Handler/" itemprop="url">
+                  Android Handler
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-05-19T12:32:23+08:00" content="2016-05-19">
+              2016-05-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+3
+4
+5
+6
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQueue和Looper的支撑。MessageQueue就是我们常说的消息队列，它的内部存储了一组消息，虽然叫做消息队列，但是它的内部却是采用单链表的数据结构来存储消息列表的。Looper为消息循环，由于MessageQueue只是一个消息的存储单元，它不能去处理消息，而Looper填补了这个功能，Looper会以无限循环的形式去查找是否有新消息，如果有就处理，如果没有就会等待。我们都知道Handler的创建是需要Looper的，也就是说Handler创建的时候会采用当前线程的Looper来构造消息循环系统。那么Handler内部是如何获取当前线程的Looper的呢?这就要使用到ThreadLocal了，它可以在不同的线程中互不干扰地存储和读取数据，通过ThreadLocal可以轻松获取每个线程的Looper。<br>下面的几个小节我们会围绕ThreadLocal、MessageQueue、Looper和Handler来阐述Android的消息机制。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/19/Android-Handler/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/19/Android-ANR/" itemprop="url">
                   Android ANR
                 </a>
@@ -236,7 +337,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-05-19T12:11:25+08:00" content="2016-05-19">
               2016-05-19
             </time>
@@ -274,7 +375,7 @@
           <p>有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/19/Android-ANR/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -337,7 +438,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-05-19T08:40:05+08:00" content="2016-05-19">
               2016-05-19
             </time>
@@ -375,7 +476,7 @@
           <p>众所周知的是，ClassLoader负责将Class加载到JVM中。除此之外还有审查每个类应该由谁来加载的功能，其次将Class字节码重新解析成JVM统一要求的对象格式</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/19/ClassLoader/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -438,7 +539,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Posted on</span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
             <time itemprop="dateCreated" datetime="2016-05-18T23:09:14+08:00" content="2016-05-18">
               2016-05-18
             </time>
@@ -476,7 +577,7 @@
           <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/18/hello-world/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -546,8 +647,8 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
@@ -602,7 +703,7 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

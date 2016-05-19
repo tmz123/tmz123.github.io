@@ -1,0 +1,596 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQueue和Looper的支撑。MessageQueue就是我们常说的消息队列，它的内部存储了一组消息，虽然叫做消息队列，但是它的内部却是采用单链表的数据结构来存储消息列表的。Looper为消息循环，由于MessageQueue只是一个消息的存储单元，它不能去处理消息，而Looper填补了这个功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Handler">
+<meta property="og:url" content="http://yoursite.com/2016/05/19/Android-Handler/index.html">
+<meta property="og:site_name" content="tmz_try`s Blog">
+<meta property="og:description" content="Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQueue和Looper的支撑。MessageQueue就是我们常说的消息队列，它的内部存储了一组消息，虽然叫做消息队列，但是它的内部却是采用单链表的数据结构来存储消息列表的。Looper为消息循环，由于MessageQueue只是一个消息的存储单元，它不能去处理消息，而Looper填补了这个功能">
+<meta property="og:updated_time" content="2016-05-19T04:34:37.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Handler">
+<meta name="twitter:description" content="Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQueue和Looper的支撑。MessageQueue就是我们常说的消息队列，它的内部存储了一组消息，虽然叫做消息队列，但是它的内部却是采用单链表的数据结构来存储消息列表的。Looper为消息循环，由于MessageQueue只是一个消息的存储单元，它不能去处理消息，而Looper填补了这个功能">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Android Handler | tmz_try`s Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">tmz_try`s Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Goals determine what you are going to be</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android Handler
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-05-19T12:32:23+08:00" content="2016-05-19">
+              2016-05-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+3
+4
+5
+6
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQueue和Looper的支撑。MessageQueue就是我们常说的消息队列，它的内部存储了一组消息，虽然叫做消息队列，但是它的内部却是采用单链表的数据结构来存储消息列表的。Looper为消息循环，由于MessageQueue只是一个消息的存储单元，它不能去处理消息，而Looper填补了这个功能，Looper会以无限循环的形式去查找是否有新消息，如果有就处理，如果没有就会等待。我们都知道Handler的创建是需要Looper的，也就是说Handler创建的时候会采用当前线程的Looper来构造消息循环系统。那么Handler内部是如何获取当前线程的Looper的呢?这就要使用到ThreadLocal了，它可以在不同的线程中互不干扰地存储和读取数据，通过ThreadLocal可以轻松获取每个线程的Looper。<br>下面的几个小节我们会围绕ThreadLocal、MessageQueue、Looper和Handler来阐述Android的消息机制。</p>
+<a id="more"></a>
+<h2 id="10-1-Android的消息机制概述"><a href="#10-1-Android的消息机制概述" class="headerlink" title="10.1 Android的消息机制概述"></a>10.1 Android的消息机制概述</h2><p>Android的消息机制主要是指Handler的运行机制以及Handler所附带的MessageQueue和Looper的工作过程，这三者实际上是一个整体，只不过我们在开发的过程中，更多的是和Handler打交道。Handler的主要作用是将一个任务切换到某个指定的线程中去执行。<br>首先，Android为什么要提供这么一个功能呢？<br>这是因为Android规定UI只能在主线程中访问，如果在子线程中访问的话就会报异常。原因是ViewRootImpl对UI操作做了验证，这个验证工作呢是由ViewRootImpl的checkThread方法来完成的，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void checkThread() &#123; </span><br><span class="line">if (mThread != Thread.currentThread()) &#123; </span><br><span class="line">throw new CalledFromWrongThreadException(</span><br><span class="line">&quot;Only the original thread that created a view hierarchy can touch its views.&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因此，系统之所以提出Handler，主要原因就是为了解决在子线程中无法访问UI的矛盾。</p>
+<p>然后就会有人问，系统为什么不允许在子线程中访问UI呢？<br>这是因为Android中的UI控件是不安全的，如果在多线程中并发访问的话就会导致UI空间处于不可预期的状态。那么又有人会说为什么不给UI控件加锁保证线程安全呢？<br>缺点有两个：<br>（1）加锁会让UI访问的逻辑变的复杂；<br>（2）加锁会降低UI访问的效率，因为锁机制会阻塞某些线程的执行；<br>所以最简单的方式就是采用单线程模型来处理UI操作，就是通过Handler切换一下UI访问的执行线程就可以了。</p>
+<h2 id="10-2-Android的消息机制详细分析"><a href="#10-2-Android的消息机制详细分析" class="headerlink" title="10.2 Android的消息机制详细分析"></a>10.2 Android的消息机制详细分析</h2><p><strong>10.2.1 ThreadLocal的工作原理</strong></p>
+<p>TheadLocal是一个线程内部的数据存储类，通过它可以在指定的线程中存取数据而与其他线程中互不干扰。</p>
+<p>TheadLocal的使用场景主要是：当某些数据是以线程为作用域并且不同线程具有不同的数据副本的时候，就可以考虑采用TheadLocal。在不同的线程中，我们虽然访问的是同一个TheadLocal对象，但是它们通过TheadLocal获取到的值却是不一样的，这就是TheadLocal的奇妙之处。那主要是因为虽然不同线程访问同一个TheadLocal的get或者set方法，但是TheadLocal会从各自的线程中取出一个数组，然后再从数组中根据当前TheadLocal的索引去查找出对应的value值，很显然不同的线程所获得的数组是不同的。这样就可以在不同的线程中维护一套数据的副本并且彼此互不干扰。</p>
+<p>对于TheadLocal的使用方法和工作过程，这里就不做解释了。我们主要来看一下它的内部实现：<br>TheadLocal是一个泛型类，它的主要方法是get和set方法。所以我们只要搞清楚这两个方法就可以明白TheadLocal的工作原理了。<br>首先来看TheadLocal的set方法，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void set(T value) &#123;</span><br><span class="line">       Thread currentThread = Thread.currentThread();</span><br><span class="line">       Values values = values(currentThread);</span><br><span class="line">       if (values == null) &#123;</span><br><span class="line">           values = initializeValues(currentThread);</span><br><span class="line">       &#125;</span><br><span class="line">       values.put(this, value);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，以当前线程为参数传入到vaules方法中就可以拿到当前线程的ThreadLocal数据。其实在Thread类的内部有一个成员是专门用于存储线程的ThreadLocal的数据： ThreadLocal.Values localValues，那么获得当前线程的ThreadLocal数据就变得很简单了。 ThreadLocal内部是如何存储在localValues中的？其实在localValues的内部有一个数组：private Objext[] table,ThreadLocal的值就存储在这个数组中。<br>下面看一下localValues是如何使用put方法将ThreadLocal的值存在这个table中的。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">void put(ThreadLocal&lt;?&gt; key, Object value) &#123;</span><br><span class="line">           cleanUp();</span><br><span class="line"></span><br><span class="line">           // Keep track of first tombstone. That&apos;s where we want to go back</span><br><span class="line">           // and add an entry if necessary.</span><br><span class="line">           int firstTombstone = -1;</span><br><span class="line"></span><br><span class="line">           for (int index = key.hash &amp; mask;; index = next(index)) &#123;</span><br><span class="line">               Object k = table[index];</span><br><span class="line"></span><br><span class="line">               if (k == key.reference) &#123;</span><br><span class="line">                   // Replace existing entry.</span><br><span class="line">                   table[index + 1] = value;</span><br><span class="line">                   return;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               if (k == null) &#123;</span><br><span class="line">                   if (firstTombstone == -1) &#123;</span><br><span class="line">                       // Fill in null slot.</span><br><span class="line">                       table[index] = key.reference;</span><br><span class="line">                       table[index + 1] = value;</span><br><span class="line">                       size++;</span><br><span class="line">                       return;</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">                   // Go back and replace first tombstone.</span><br><span class="line">                   table[firstTombstone] = key.reference;</span><br><span class="line">                   table[firstTombstone + 1] = value;</span><br><span class="line">                   tombstones--;</span><br><span class="line">                   size++;</span><br><span class="line">                   return;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               // Remember first tombstone.</span><br><span class="line">               if (firstTombstone == -1 &amp;&amp; k == TOMBSTONE) &#123;</span><br><span class="line">                   firstTombstone = index;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>从这里我们大致得到这样一个结论，那就是ThreadLocal的值在table数组中的存储位置总是为ThreadLocal的reference字段所标识的对象的下一个位置，比如ThreadLocal的reference对象在table数组中的索引为index，那么ThreadLocal的值在table数组中的位置就是table[index+1]。最终，ThreadLocal的值就会被存储在tbale数组中：table[index+1] = value.<br>下面再来看一下ThreadLocal的get方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public T get() &#123;</span><br><span class="line">        // Optimized for the fast path.</span><br><span class="line">        Thread currentThread = Thread.currentThread();</span><br><span class="line">        Values values = values(currentThread);</span><br><span class="line">        if (values != null) &#123;</span><br><span class="line">            Object[] table = values.table;</span><br><span class="line">            int index = hash &amp; values.mask;</span><br><span class="line">            if (this.reference == table[index]) &#123;</span><br><span class="line">                return (T) table[index + 1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            values = initializeValues(currentThread);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return (T) values.getAfterMiss(this);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这个过程很清楚，就是取出当前线程的localValues对象，如果这个对象为null那么就返回初始值。</p>
+<p>从get和set方法可以看出，他们所操作的对象都是当前线程的localValues对象的table数组，因此在不同的线程中访问同一个ThreadLocal的set和get方法，它们对ThreadLocal所做的操作仅限于在各自的线程中，这也就解释了为什么ThreadLocal可以在多个线程中互不干扰的存储和修改数据。</p>
+<p><strong>10.2.2 MessageQueue的工作原理</strong></p>
+<p>MessageQueue就是我们常说的消息队列，前面已经说过尽管也叫队列，但是内部的实现还是单链表【插入和删除方面比较有优势】。MessageQueue包含两个基本操作：插入和读取，分别对应的方法是：enqueueMessage和next，next方法从消息队列中取出一条消息的同时往往也伴随着删除这条消息的操作。在enqueueMessage和next方法中主要就是单链表的插入和删除的操作，这个只要大家有过基本的数据结构的知识看懂都不难，就不再解释了。值得注意的一点是：next方法是一个死循环，如果消息队列中没有消息的话就会被阻塞，当有消息到来时，next方法会返回这条消息并将其从单链表中删除。</p>
+<p><strong>10.2.3 Looper的工作原理</strong></p>
+<p>Looper在消息机制中扮演的角色是消息循环，具体的来说它会不停歇的在Message    Queue中查看是否有新消息，如果有新消息就会立刻处理，如果没有的话就会阻塞在那里。我们先看一下它的构造方法，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private Looper(boolean quitAllowed) &#123;</span><br><span class="line">        mQueue = new MessageQueue(quitAllowed);</span><br><span class="line">        mThread = Thread.currentThread();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>Handler的工作创建工作是需要Looper支撑的。如何为一个线程创建一个Looper呢，其实很简单，通过Looper.prepare()为当前线程创建一个Looper，接着通过Looper.loop()来开启消息循环。<br>大家可能注意到了，Looper和MessageQueue是关联的，MessageQueue的next方法是死循环，一旦没有新消息就会阻塞，Looper的loop方法也是死循环。那么可能大家就会问那既然是死循环难道就不能停止或者退出吗？答案肯定是有的，首先可以告诉大家的是这两者的退出是相关的。下面就是详细的解释：</p>
+<p>loop方法就是一个死循环，退出循环的唯一方式就是MessageQueue的next方法返回了null。但是刚才我们注意到了，next方法即使没有新的消息也没有返回null而是被阻塞。其实当只要Looper的quit方法被调用，MessageQueue就会被标记为退出状态，这个时候不管有没有新消息next方法都会返回null的。因此，想要Looper的loop跳出循环的话，必须调用quit方法使得loop跳出循环的条件成立，即MessageQueue的next方法返回了null，这样loop就停止了。总而言之，Looper用完必须调用quit方法退出，这样的话循环才会停止。<br>loop方法会不断的调用MessageQueue的next方法获取新消息，而next方法是一个阻塞操作，当没有消息时就会阻塞，这时loop方法也会阻塞的。如果next返回了新消息，Looper就会处理这条消息：msg.target.dispatchMessage，而这个msg.target就是这条消息的Handler对象，这样Handler发送的消息最终最终是自己的dispatchMessage去处理的。但是这里有不同：Handler的dispatchMessage方法是在创建Handler所使用的Looper【每一个Looper与线程是关联的】中执行的，这样就成功的将代码逻辑切换到指定的线程中去了。</p>
+<p><strong>10.2.4 Handler的工作原理</strong></p>
+<p>Handler的工作主要是消息的发送和接收过程。<br>Handler发送消息的过程仅仅是向信息队列中插入了一条消息，MessageQueue的next方法就会返回这条消息给Looper，Looper收到消息后就开始处理了。最终消息由Looper交由Handler处理，即Handler的dispatchMessage方法会被调用。这时Handler就进入到消息处理阶段了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     * Handle system messages here.</span><br><span class="line">     */</span><br><span class="line">    public void dispatchMessage(Message msg) &#123;</span><br><span class="line">        if (msg.callback != null) &#123;</span><br><span class="line">            handleCallback(msg);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (mCallback != null) &#123;</span><br><span class="line">                if (mCallback.handleMessage(msg)) &#123;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            handleMessage(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line">首先检查Message的callback是否为null，不为null就通过handleCallback来处理消息。Message的callback是一个Runnable对象，其实就是Handler的post方法所传递的Runnable参数。handlercallback的逻辑也是很简单的，就是简单的调用了一下Runnable的run方法：</span><br></pre></td></tr></table></figure>
+<p>private static void handleCallback(Message message) {<br>        message.callback.run();<br>    }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">其次，检查mCallback是否为null，不为null就调用mCallback的handleMessage方法来处理消息，其实mCallback是一个接口，是这么定义的：</span><br></pre></td></tr></table></figure></p>
+<p>/**</p>
+<pre><code> * Callback interface you can use when instantiating a Handler to avoid
+ * having to implement your own subclass of Handler.
+ *
+ * @param msg A {@link android.os.Message Message} object
+ * @return True if no further handling is desired
+ */
+public interface Callback {
+    public boolean handleMessage(Message msg);
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">最后调用了handleMessage方法来处理消息。</span><br><span class="line"></span><br><span class="line">10.3 主线程的消息循环</span><br><span class="line">-------------</span><br><span class="line"></span><br><span class="line">Android的主线程就是ActivityThread，主线程的入口方法就是main，在main方法中系统会通过Looper.prepareMainLooper来创建Looper以及MessageQueue，并通过Looper.loop来开启主线程的消息循环。这个过程如下所示：</span><br></pre></td></tr></table></figure>
+<pre><code>public static void main(String[] args) { 
+    // 代码省略
+    Looper.prepareMainLooper();
+
+    ActivityThread thread = new ActivityThread();
+    thread.attach(false);
+
+    if (sMainThreadHandler == null) {
+        sMainThreadHandler = thread.getHandler();
+    }
+
+    if (false) {
+        Looper.myLooper().setMessageLogging(new
+                LogPrinter(Log.DEBUG, &quot;ActivityThread&quot;));
+    } Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
+    Looper.loop(); 
+    throw new RuntimeException(&quot;Main thread loop unexpectedly exited&quot;);
+}
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主线程的消息循环开始了以后，ActivityThread还需要一个handler来和消息队列进行交互，这个Handler就是ActivityThread.H，它内部定义了一组消息类型，主要包含了四大组件的启动和停止等过程，如下所示：</span><br></pre></td></tr></table></figure>
+<p> private class H extends Handler {<br>        public static final int LAUNCH_ACTIVITY         = 100;<br>        public static final int PAUSE_ACTIVITY          = 101;<br>        public static final int PAUSE_ACTIVITY_FINISHING= 102;<br>        public static final int STOP_ACTIVITY_SHOW      = 103;<br>        public static final int STOP_ACTIVITY_HIDE      = 104;<br>        public static final int SHOW_WINDOW             = 105;<br>        public static final int HIDE_WINDOW             = 106;<br>        public static final int RESUME_ACTIVITY         = 107;<br>        public static final int SEND_RESULT             = 108;<br>        public static final int DESTROY_ACTIVITY        = 109;<br>        ……<br>        ……<br>}<br>```<br>ActivityThread通过ApplicationThread和AMS进行进程间通信，AMS以进程间通信的方式完成ActivityThread的请求后回调<br>ApplicationThread的Binder方法，然后ApplicationThread会向H发送消息，H收到消息后会将ApplicationThread中的逻辑切换到ActivityThread中去执行，即切换到主线程中执行，这个过程就是主线程的消息循环模型。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/19/Android-ANR/" rel="next" title="Android ANR">
+                <i class="fa fa-chevron-left"></i> Android ANR
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="xueying" />
+          <p class="site-author-name" itemprop="name">xueying</p>
+          <p class="site-description motion-element" itemprop="description">Goals determine what you are going to be</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-Android的消息机制概述"><span class="nav-number">1.</span> <span class="nav-text">10.1 Android的消息机制概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-Android的消息机制详细分析"><span class="nav-number">2.</span> <span class="nav-text">10.2 Android的消息机制详细分析</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xueying</span>
+  <span id="busuanzi_container_site_pv">
+    PageView<span id="busuanzi_value_site_pv"></span>
+</span>
+<span id="busuanzi_container_site_uv">
+  UniqueView <span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
