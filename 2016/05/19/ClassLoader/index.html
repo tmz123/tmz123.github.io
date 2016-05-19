@@ -6,42 +6,45 @@
   <title>ClassLoader | tmz123`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="#ClassLoader
-###����
+###作用
 
-������Class���ص�JVM��
-����ÿ����Ӧ����˭������
-��Class�ֽ������½�����JVMͳһҪ���Ķ�����ʽ
+负责将Class加载到JVM中
+审查每个类应该由谁来加载
+将Class字节码重新解析成JVM统一要求的对象格式
 
-###ClassLoader�ĵȼ������ƶ�
+###ClassLoader的等级加载制度
 
-���ж��Լ��Ƿ����ع����������ع��ͻ��ܾ�����������û�нӴ����ͻ�����ѯ���Ƿ񱻸���һ">
+先判断自己是否加载过，如果加载过就会拒绝服务，如果没有接待过就会向上询问是否被更高一级接待过
+上级会根据自己的接待原则检查这个会员是否被接待过，如果接待过就会拒绝再次接待，同时将已经接待过的结果反馈给">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ClassLoader">
 <meta property="og:url" content="http://yoursite.com/2016/05/19/ClassLoader/index.html">
 <meta property="og:site_name" content="tmz123`s Blog">
 <meta property="og:description" content="#ClassLoader
-###����
+###作用
 
-������Class���ص�JVM��
-����ÿ����Ӧ����˭������
-��Class�ֽ������½�����JVMͳһҪ���Ķ�����ʽ
+负责将Class加载到JVM中
+审查每个类应该由谁来加载
+将Class字节码重新解析成JVM统一要求的对象格式
 
-###ClassLoader�ĵȼ������ƶ�
+###ClassLoader的等级加载制度
 
-���ж��Լ��Ƿ����ع����������ع��ͻ��ܾ�����������û�нӴ����ͻ�����ѯ���Ƿ񱻸���һ">
-<meta property="og:updated_time" content="2016-05-18T16:36:29.021Z">
+先判断自己是否加载过，如果加载过就会拒绝服务，如果没有接待过就会向上询问是否被更高一级接待过
+上级会根据自己的接待原则检查这个会员是否被接待过，如果接待过就会拒绝再次接待，同时将已经接待过的结果反馈给">
+<meta property="og:updated_time" content="2016-05-19T00:57:53.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ClassLoader">
 <meta name="twitter:description" content="#ClassLoader
-###����
+###作用
 
-������Class���ص�JVM��
-����ÿ����Ӧ����˭������
-��Class�ֽ������½�����JVMͳһҪ���Ķ�����ʽ
+负责将Class加载到JVM中
+审查每个类应该由谁来加载
+将Class字节码重新解析成JVM统一要求的对象格式
 
-###ClassLoader�ĵȼ������ƶ�
+###ClassLoader的等级加载制度
 
-���ж��Լ��Ƿ����ع����������ع��ͻ��ܾ�����������û�нӴ����ͻ�����ѯ���Ƿ񱻸���һ">
+先判断自己是否加载过，如果加载过就会拒绝服务，如果没有接待过就会向上询问是否被更高一级接待过
+上级会根据自己的接待原则检查这个会员是否被接待过，如果接待过就会拒绝再次接待，同时将已经接待过的结果反馈给">
   
     <link rel="alternate" href="/atom.xml" title="tmz123`s Blog" type="application/atom+xml">
   
@@ -97,7 +100,7 @@
         <section id="main"><article id="post-ClassLoader" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/19/ClassLoader/" class="article-date">
-  <time datetime="2016-05-18T16:29:34.000Z" itemprop="datePublished">2016-05-19</time>
+  <time datetime="2016-05-19T00:40:05.000Z" itemprop="datePublished">2016-05-19</time>
 </a>
     
   </div>
@@ -117,61 +120,61 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#ClassLoader</p>
-<p>###����</p>
+<p>###作用</p>
 <ul>
-<li>������Class���ص�JVM��</li>
-<li>����ÿ����Ӧ����˭������</li>
-<li>��Class�ֽ������½�����JVMͳһҪ���Ķ�����ʽ</li>
+<li>负责将Class加载到JVM中</li>
+<li>审查每个类应该由谁来加载</li>
+<li>将Class字节码重新解析成JVM统一要求的对象格式</li>
 </ul>
-<p>###ClassLoader�ĵȼ������ƶ�</p>
+<p>###ClassLoader的等级加载制度</p>
 <ol>
-<li>���ж��Լ��Ƿ����ع����������ع��ͻ��ܾ�����������û�нӴ����ͻ�����ѯ���Ƿ񱻸���һ���Ӵ���</li>
-<li>�ϼ��������Լ��ĽӴ�ԭ������������Ա�Ƿ񱻽Ӵ����������Ӵ����ͻ��ܾ��ٴνӴ���ͬʱ���Ѿ��Ӵ����Ľ�����������һ��������û�нӴ����Ļ��ͻ���������һ����ѯ��.����һ��Ҳ��ͬ���Ĵ����취��ֱ����һ���Ӵ����߸�����һ��������Ա�����Լ��Ӵ���</li>
+<li>先判断自己是否加载过，如果加载过就会拒绝服务，如果没有接待过就会向上询问是否被更高一级接待过</li>
+<li>上级会根据自己的接待原则检查这个会员是否被接待过，如果接待过就会拒绝再次接待，同时将已经接待过的结果反馈给下一级；如果没有接待过的话就会再向更高一级的询问.更高一级也是同样的处理办法。直到有一级接待或者告诉下一级这个会员不是自己接待。</li>
 </ol>
-<p>###����ClassLoader</p>
+<p>###三种ClassLoader</p>
 <ul>
-<li>Bootstrap ClassLoader ������������ :��������������Ϊ�Ӵ����Լ����������ġ�����JVMϵͳ���Ƶģ�������ϵͳ���ļ��ع��߶���</li>
-<li>ExtClassLoader ��׼��չ�������� :��JVM������һ���֣������ֲ���JVM����ʵ�ֵģ�Ҳ����ͨ���ⲿ��Ա��ͬ</li>
-<li>AppClassLoader ϵͳ�������� :ר��Ϊ��Ա������</li>
+<li>Bootstrap ClassLoader 启动类加载器 :这个加载器就是为接待室自己本身服务的。他是JVM系统控制的，仅仅是系统类的加载工具而已</li>
+<li>ExtClassLoader 标准扩展类加载器 :是JVM本身的一部分，可是又不是JVM亲自实现的，也和普通的外部会员不同</li>
+<li>AppClassLoader 系统类加载器 :专门为会员服务的</li>
 </ul>
-<p>###JVM����class�ļ����ڴ��еķ�ʽ</p>
+<p>###JVM加载class文件到内存中的方式</p>
 <ul>
-<li><strong>��ʽ����</strong>����ͨ�����������ö���ͨ��JVM���Զ�������Ҫ���ൽ�ڴ���<pre><code>��ʽ�������̳�ĳ������ʱ����JVM��������ǰ������ʱ�������õ��� �����ڴ��оͻ��Զ��Ľ���Щ�����ص��ڴ��С�
+<li><strong>隐式加载</strong>：不通过代码里调用而是通过JVM来自动加载需要的类到内存的<pre><code>方式。例如继承某个类的时候，JVM会解析当前这个类时发现引用的类 不在内存中就会自动的将这些类加载到内存中。
 </code></pre></li>
-<li><strong>��ʾ����</strong>���ڴ�����ͨ������ClassLoader��������һ�����ķ�ʽ��<pre><code>���磺
+<li><strong>显示加载</strong>：在代码中通过调用ClassLoader类来加载一个类的方式。<pre><code>例如：
 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.getClass.getClassLoader.loadClass().Class.forName();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>###���μ���class�ļ�</p>
+<p>###如何加载class文件</p>
 <ol>
-<li>���أ�ʵ�ֳ�����ClassLoader�е�findClass����ȥ�ҵ�.class�ļ����������ļ��������ֽ������ص��ڴ��У��ٵ���defineClass����������������</li>
-<li>��֤���ֽ�����֤��ȷ������JVM�淶</li>
-<li>׼����׼������ÿ�����ж������ֶΣ�������ʵ�ֽӿ������������ݽṹ</li>
-<li>��������װ�����ͻ�װ�������õ�����������</li>
-<li>��ʼ�������еľ�̬���Ժͳ�ʼ����ֵ�Լ���̬����ִ��</li>
+<li>加载：实现抽象类ClassLoader中的findClass方法去找到.class文件并把这个文件包含的字节码加载到内存中，再调用defineClass方法来创建类对象</li>
+<li>验证：字节码验证，确保符合JVM规范</li>
+<li>准备：准备代表每个类中定义的字段，方法和实现接口所必需的数据结构</li>
+<li>解析：类装入器就会装入所引用的其他所有类</li>
+<li>初始化：类中的静态属性和初始化赋值以及静态块的执行</li>
 </ol>
-<p>###JVM������</p>
-<p>JVM�ܹ�����������ϵ�ṹִ��java�ֽ�����Ҫ������JVM������������������ƽ̨xiang�ص���������Ӳ��֮���Ĳ��죬ʹ����ƽ̨���ص�����ͳһ��JVM�ṩ����ʵ�֡�</p>
-<p>###ָ�����������</p>
-<p>ָ����ǿ���ֱ�ӱ�����ʶ���Ļ����룬Ҳ�������������Զ����Ƹ�ʽ�������������еģ��������������ܹ�����ʶ����ָ��������Ծ���Ϊ���������ܹ������׵ؼ�ס����ָ����ʹ�õ����Ƿ���</p>
-<p>###JVM��ʵ������ʲô��ͬ</p>
+<p>###JVM的作用</p>
+<p>JVM能够跨计算机体系结构执行java字节码主要是由于JVM屏蔽了与各个计算机平台xiang关的软件或者硬件之间的差异，使得与平台相关的耦合统一有JVM提供者来实现。</p>
+<p>###指令集与汇编语言</p>
+<p>指令集就是可以直接被机器识别的机器码，也就是它必须是以二进制格式存在与计算机中的，而汇编语言是能够被人识别的指令，汇编语言就是为了能让人能够更容易地记住机器指令而使用的助记符。</p>
+<p>###JVM与实体机有什么不同</p>
 <ul>
-<li>һ�������淶�������淶Լ����JVM������ʲô���������ɳɷ�</li>
-<li>һ��������ʵ�֣����ǲ�ͬ�ĳ��̰������������Ĺ淶�������ڲ�ͬƽ̨�ϵľ�����ʵ��</li>
-<li>һ�������е�ʵ����������һ��Java������ʱ����������һ��JVMʵ��</li>
+<li>一个抽象规范：这个规范约束了JVM到底是什么？它的组成成分</li>
+<li>一个具体的实现：就是不同的厂商按照这个抽象的规范用软件在不同平台上的具体的实现</li>
+<li>一个运行中的实例：当运行一个Java程序的时候，它就是一个JVM实例</li>
 </ul>
-<p>###JVM��ϵ�ṹ����</p>
+<p>###JVM体系结构详解</p>
 <ol>
-<li>������������������ʱ���Ὣclass�ļ����ص��ڴ���</li>
-<li>ִ�����棺�൱��CPU������ִ��class�ļ��а������ֽ���ָ��</li>
-<li>�ڴ�����ģ���������еĴ洢����¼�͵���ģ��</li>
-<li>���ط�����������C/C++ʵ�ֵı��ط����Ĵ��뷵�ؽ���</li>
+<li>类加载器：在启动的时候会将class文件加载到内存中</li>
+<li>执行引擎：相当于CPU，负责执行class文件中包含的字节码指令</li>
+<li>内存区：模拟计算机中的存储，记录和调度模块</li>
+<li>本地方法区：调用C/C++实现的本地方法的代码返回结果</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/ClassLoader/" data-id="ciodk4ief00003gowlhw7l1m8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/19/ClassLoader/" data-id="ciodl9hb70000c8owtlkygi17" class="article-share-link">Share</a>
       
       
     </footer>
@@ -180,19 +183,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/05/19/tang-ming-zhang/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          tang ming zhang
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/19/tang-ming-zhang/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">tang ming zhang</div>
     </a>
   
 </nav>
@@ -229,11 +223,11 @@
       <ul>
         
           <li>
-            <a href="/2016/05/19/tang-ming-zhang/">tang ming zhang</a>
+            <a href="/2016/05/19/ClassLoader/">ClassLoader</a>
           </li>
         
           <li>
-            <a href="/2016/05/19/ClassLoader/">ClassLoader</a>
+            <a href="/2016/05/19/tang-ming-zhang/">tang ming zhang</a>
           </li>
         
           <li>
