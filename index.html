@@ -90,52 +90,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#ClassLoader</p>
-<p>###作用</p>
-<ul>
+        <h1 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h1><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
 <li>负责将Class加载到JVM中</li>
 <li>审查每个类应该由谁来加载</li>
 <li>将Class字节码重新解析成JVM统一要求的对象格式</li>
 </ul>
-<p>###ClassLoader的等级加载制度</p>
-<ol>
+<h3 id="ClassLoader的等级加载制度"><a href="#ClassLoader的等级加载制度" class="headerlink" title="ClassLoader的等级加载制度"></a>ClassLoader的等级加载制度</h3><ol>
 <li>先判断自己是否加载过，如果加载过就会拒绝服务，如果没有接待过就会向上询问是否被更高一级接待过</li>
 <li>上级会根据自己的接待原则检查这个会员是否被接待过，如果接待过就会拒绝再次接待，同时将已经接待过的结果反馈给下一级；如果没有接待过的话就会再向更高一级的询问.更高一级也是同样的处理办法。直到有一级接待或者告诉下一级这个会员不是自己接待。</li>
 </ol>
-<p>###三种ClassLoader</p>
-<ul>
+<h3 id="三种ClassLoader"><a href="#三种ClassLoader" class="headerlink" title="三种ClassLoader"></a>三种ClassLoader</h3><ul>
 <li>Bootstrap ClassLoader 启动类加载器 :这个加载器就是为接待室自己本身服务的。他是JVM系统控制的，仅仅是系统类的加载工具而已</li>
 <li>ExtClassLoader 标准扩展类加载器 :是JVM本身的一部分，可是又不是JVM亲自实现的，也和普通的外部会员不同</li>
 <li>AppClassLoader 系统类加载器 :专门为会员服务的</li>
 </ul>
-<p>###JVM加载class文件到内存中的方式</p>
-<ul>
+<h3 id="JVM加载class文件到内存中的方式"><a href="#JVM加载class文件到内存中的方式" class="headerlink" title="JVM加载class文件到内存中的方式"></a>JVM加载class文件到内存中的方式</h3><ul>
 <li><strong>隐式加载</strong>：不通过代码里调用而是通过JVM来自动加载需要的类到内存的<pre><code>方式。例如继承某个类的时候，JVM会解析当前这个类时发现引用的类 不在内存中就会自动的将这些类加载到内存中。
 </code></pre></li>
 <li><strong>显示加载</strong>：在代码中通过调用ClassLoader类来加载一个类的方式。<pre><code>例如：
 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.getClass.getClassLoader.loadClass().Class.forName();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>###如何加载class文件</p>
-<ol>
+<h3 id="如何加载class文件"><a href="#如何加载class文件" class="headerlink" title="如何加载class文件"></a>如何加载class文件</h3><ol>
 <li>加载：实现抽象类ClassLoader中的findClass方法去找到.class文件并把这个文件包含的字节码加载到内存中，再调用defineClass方法来创建类对象</li>
 <li>验证：字节码验证，确保符合JVM规范</li>
 <li>准备：准备代表每个类中定义的字段，方法和实现接口所必需的数据结构</li>
 <li>解析：类装入器就会装入所引用的其他所有类</li>
 <li>初始化：类中的静态属性和初始化赋值以及静态块的执行</li>
 </ol>
-<p>###JVM的作用</p>
-<p>JVM能够跨计算机体系结构执行java字节码主要是由于JVM屏蔽了与各个计算机平台xiang关的软件或者硬件之间的差异，使得与平台相关的耦合统一有JVM提供者来实现。</p>
-<p>###指令集与汇编语言</p>
-<p>指令集就是可以直接被机器识别的机器码，也就是它必须是以二进制格式存在与计算机中的，而汇编语言是能够被人识别的指令，汇编语言就是为了能让人能够更容易地记住机器指令而使用的助记符。</p>
-<p>###JVM与实体机有什么不同</p>
-<ul>
+<h3 id="JVM的作用"><a href="#JVM的作用" class="headerlink" title="JVM的作用"></a>JVM的作用</h3><p>JVM能够跨计算机体系结构执行java字节码主要是由于JVM屏蔽了与各个计算机平台xiang关的软件或者硬件之间的差异，使得与平台相关的耦合统一有JVM提供者来实现。</p>
+<h3 id="指令集与汇编语言"><a href="#指令集与汇编语言" class="headerlink" title="指令集与汇编语言"></a>指令集与汇编语言</h3><p>指令集就是可以直接被机器识别的机器码，也就是它必须是以二进制格式存在与计算机中的，而汇编语言是能够被人识别的指令，汇编语言就是为了能让人能够更容易地记住机器指令而使用的助记符。</p>
+<h3 id="JVM与实体机有什么不同"><a href="#JVM与实体机有什么不同" class="headerlink" title="JVM与实体机有什么不同"></a>JVM与实体机有什么不同</h3><ul>
 <li>一个抽象规范：这个规范约束了JVM到底是什么？它的组成成分</li>
 <li>一个具体的实现：就是不同的厂商按照这个抽象的规范用软件在不同平台上的具体的实现</li>
 <li>一个运行中的实例：当运行一个Java程序的时候，它就是一个JVM实例</li>
 </ul>
-<p>###JVM体系结构详解</p>
-<ol>
+<h3 id="JVM体系结构详解"><a href="#JVM体系结构详解" class="headerlink" title="JVM体系结构详解"></a>JVM体系结构详解</h3><ol>
 <li>类加载器：在启动的时候会将class文件加载到内存中</li>
 <li>执行引擎：相当于CPU，负责执行class文件中包含的字节码指令</li>
 <li>内存区：模拟计算机中的存储，记录和调度模块</li>
