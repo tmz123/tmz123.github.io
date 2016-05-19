@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="tmz_try`s Blog">
 <meta property="og:description" content="有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。">
 <meta property="og:image" content="http://i.imgur.com/4rY9PEH.png">
-<meta property="og:updated_time" content="2016-05-19T04:20:03.385Z">
+<meta property="og:updated_time" content="2016-05-19T04:25:28.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android ANR">
 <meta name="twitter:description" content="有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。">
@@ -268,7 +268,7 @@
       
 
       
-        <p><strong>有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。</strong></p>
+        <p>有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。</p>
 <a id="more"></a>
 <h2 id="什么是ANR"><a href="#什么是ANR" class="headerlink" title="什么是ANR"></a>什么是ANR</h2><p>ANR全称Application Not Responding，意思就是程序未响应。如果一个应用无法响应用户的输入，系统就会弹出一个ANR对话框，如下图所示,用户可以自行选择继续等待亦或者是停止当前程序。</p>
 <p><img src="http://i.imgur.com/4rY9PEH.png" alt="ANR"></p>
@@ -285,7 +285,7 @@
 <h2 id="如何避免"><a href="#如何避免" class="headerlink" title="如何避免"></a>如何避免</h2><p><strong>基本的思路就是将IO操作在工作线程来处理，减少其他耗时操作和错误操作</strong></p>
 <ul>
 <li>使用AsyncTask处理耗时IO操作。</li>
-<li>使用Thread或者HandlerThread时，调用Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)设置优先级，否则仍然会降低程序响应，因为默认Thread的优先级和主线程相同。</li>
+<li>使用Thread或者HandlerThread时，使用工作线程时设置优先级，否则仍然会降低程序响应，因为默认Thread的优先级和主线程相同。例如：<br>  <code>Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)</code></li>
 <li>使用Handler处理工作线程结果，而不是使用Thread.wait()或者Thread.sleep()来阻塞主线程。</li>
 <li>Activity的onCreate和onResume回调中尽量避免耗时的代码</li>
 <li>BroadcastReceiver中onReceive代码也要尽量减少耗时，建议使用IntentService处理。</li>
