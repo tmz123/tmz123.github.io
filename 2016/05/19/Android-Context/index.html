@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="title: Android Context Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是">
+<meta name="description" content="Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是要有一个完整的Android工程环境，在这个环境">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tmz_try`s Blog">
+<meta property="og:title" content="Android Context">
 <meta property="og:url" content="http://yoursite.com/2016/05/19/Android-Context/index.html">
 <meta property="og:site_name" content="tmz_try`s Blog">
-<meta property="og:description" content="title: Android Context Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是">
+<meta property="og:description" content="Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是要有一个完整的Android工程环境，在这个环境">
 <meta property="og:image" content="http://img.blog.csdn.net/20160519210912888">
-<meta property="og:updated_time" content="2016-05-19T13:35:37.496Z">
+<meta property="og:updated_time" content="2016-05-19T13:39:39.552Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tmz_try`s Blog">
-<meta name="twitter:description" content="title: Android Context Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是">
+<meta name="twitter:title" content="Android Context">
+<meta name="twitter:description" content="Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是要有一个完整的Android工程环境，在这个环境">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160519210912888">
 
 
@@ -113,7 +113,7 @@
   };
 </script>
 
-  <title>  | tmz_try`s Blog </title>
+  <title> Android Context | tmz_try`s Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -223,7 +223,7 @@
             
             
               
-                
+                Android Context
               
             
           </h1>
@@ -268,8 +268,7 @@
       
 
       
-        <hr>
-<h2 id="title-Android-Context"><a href="#title-Android-Context" class="headerlink" title="title: Android Context "></a>title: Android Context </h2><p>Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是要有一个完整的Android工程环境，在这个环境下，我们有像Activity、Service、BroadcastReceiver等系统组件，而这些组件并不是像一个普通的Java对象new一下就能创建实例的了，而是要有它们各自的上下文环境，也就是我们这里讨论的Context。可以这样讲，<strong>Context是维持Android程序中各组件能够正常工作的一个核心功能类。</strong></p>
+        <p>Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是要有一个完整的Android工程环境，在这个环境下，我们有像Activity、Service、BroadcastReceiver等系统组件，而这些组件并不是像一个普通的Java对象new一下就能创建实例的了，而是要有它们各自的上下文环境，也就是我们这里讨论的Context。可以这样讲，<strong>Context是维持Android程序中各组件能够正常工作的一个核心功能类。</strong></p>
 <a id="more"></a>
 <h3 id="Context的继承结构"><a href="#Context的继承结构" class="headerlink" title="Context的继承结构"></a>Context的继承结构</h3><p>先上图，如下：<br><img src="http://img.blog.csdn.net/20160519210912888" alt="Context的继承结构"></p>
 <p>可以看到，直系子类有两个，一个是ContextWrapper，一个是ContextImpl。那么从名字上就可以看出，ContextWrapper是上下文功能的封装类，而ContextImpl则是上下文功能的实现类。而ContextWrapper又有三个直接的子类，ContextThemeWrapper、Service和Application。其中，ContextThemeWrapper是一个带主题的封装类，而它有一个直接子类就是Activity。</p>
@@ -298,7 +297,7 @@
 <p>其实所有ContextWrapper中方法的实现都非常统一，就是调用了mBase对象中对应当前方法名的方法。</p>
 <p>那么这个mBase对象又是什么呢？我们来看attachBaseContext()方法，这个方法中传入了一个base参数，并把这个参数赋值给了mBase对象。而attachBaseContext()方法其实是由系统来调用的，它会把ContextImpl对象作为参数传递到attachBaseContext()方法当中，从而赋值给mBase对象，之后ContextWrapper中的所有方法其实都是通过这种委托的机制交由ContextImpl去具体实现的，所以说ContextImpl是上下文功能的实现类是非常准确的。</p>
 <p>在上面我们提到的getBaseContext方法中，只有一行代码，就是返回了mBase对象而已，而mBase对象其实就是ContextImpl对象。</p>
-<h4 id="使用Application的问题"><a href="#使用Application的问题" class="headerlink" title="使用Application的问题"></a>使用Application的问题</h4><p><strong>Application是Context的其中一种类型，那么是否就意味着，只要是Application的实例，就能随时使用Context的各种方法呢？</strong></p>
+<h3 id="使用Application的问题"><a href="#使用Application的问题" class="headerlink" title="使用Application的问题"></a>使用Application的问题</h3><p><strong>Application是Context的其中一种类型，那么是否就意味着，只要是Application的实例，就能随时使用Context的各种方法呢？</strong></p>
 <p>看下面这段代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class MyApplication extends Application &#123;</span><br><span class="line"></span><br><span class="line">     public MyApplication() &#123;</span><br><span class="line">          String packageName = getPackageName();</span><br><span class="line">          Log.d(&quot;TAG&quot;, &quot;package name is &quot; + packageName);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这是一个非常简单的自定义Application，我们在MyApplication的构造方法当中获取了当前应用程序的包名，并打印出来。获取包名使用了getPackageName()方法，这个方法就是由Context提供的。那么上面的代码能正常运行吗？</p>
@@ -450,7 +449,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title-Android-Context"><span class="nav-number">1.</span> <span class="nav-text">title: Android Context </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Context的继承结构"><span class="nav-number">1.1.</span> <span class="nav-text">Context的继承结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Context数量"><span class="nav-number">1.2.</span> <span class="nav-text">Context数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Application-Context的设计"><span class="nav-number">1.3.</span> <span class="nav-text">Application Context的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Application的问题"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用Application的问题</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Context的继承结构"><span class="nav-number">1.</span> <span class="nav-text">Context的继承结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Context数量"><span class="nav-number">2.</span> <span class="nav-text">Context数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Application-Context的设计"><span class="nav-number">3.</span> <span class="nav-text">Application Context的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Application的问题"><span class="nav-number">4.</span> <span class="nav-text">使用Application的问题</span></a></li></ol></div>
             
           </div>
         </section>
