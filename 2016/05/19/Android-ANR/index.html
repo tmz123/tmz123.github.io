@@ -84,16 +84,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/05/18/hello-world/index.html">
+<meta property="og:title" content="Android ANR">
+<meta property="og:url" content="http://yoursite.com/2016/05/19/Android-ANR/index.html">
 <meta property="og:site_name" content="tmz_try`s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta property="og:updated_time" content="2016-05-19T01:31:09.849Z">
+<meta property="og:description" content="有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。">
+<meta property="og:image" content="http://i.imgur.com/4rY9PEH.png">
+<meta property="og:updated_time" content="2016-05-19T04:20:03.385Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="Android ANR">
+<meta name="twitter:description" content="有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。">
+<meta name="twitter:image" content="http://i.imgur.com/4rY9PEH.png">
 
 
 
@@ -111,7 +113,7 @@
   };
 </script>
 
-  <title> Hello World | tmz_try`s Blog </title>
+  <title> Android ANR | tmz_try`s Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -221,7 +223,7 @@
             
             
               
-                Hello World
+                Android ANR
               
             
           </h1>
@@ -233,8 +235,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-05-18T23:09:14+08:00" content="2016-05-18">
-              2016-05-18
+            <time itemprop="dateCreated" datetime="2016-05-19T12:11:25+08:00" content="2016-05-19">
+              2016-05-19
             </time>
           </span>
 
@@ -266,16 +268,35 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+        <p><strong>有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。</strong></p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h2 id="什么是ANR"><a href="#什么是ANR" class="headerlink" title="什么是ANR"></a>什么是ANR</h2><p>ANR全称Application Not Responding，意思就是程序未响应。如果一个应用无法响应用户的输入，系统就会弹出一个ANR对话框，如下图所示,用户可以自行选择继续等待亦或者是停止当前程序。</p>
+<p><img src="http://i.imgur.com/4rY9PEH.png" alt="ANR"></p>
+<h2 id="出现场景"><a href="#出现场景" class="headerlink" title="出现场景"></a>出现场景</h2><ul>
+<li>主线程被IO操作（从4.0之后网络IO不允许在主线程中）阻塞。</li>
+<li>主线程中存在耗时的计算</li>
+<li>主线程中错误的操作，比如Thread.wait或者Thread.sleep等</li>
+</ul>
+<p>Android系统会监控程序的响应状况，一旦出现下面两种情况，则弹出ANR对话框</p>
+<ul>
+<li>应用在5秒内未响应用户的输入事件（如按键或者触摸）</li>
+<li>BroadcastReceiver未在10秒内完成相关的处理</li>
+</ul>
+<h2 id="如何避免"><a href="#如何避免" class="headerlink" title="如何避免"></a>如何避免</h2><p><strong>基本的思路就是将IO操作在工作线程来处理，减少其他耗时操作和错误操作</strong></p>
+<ul>
+<li>使用AsyncTask处理耗时IO操作。</li>
+<li>使用Thread或者HandlerThread时，调用Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)设置优先级，否则仍然会降低程序响应，因为默认Thread的优先级和主线程相同。</li>
+<li>使用Handler处理工作线程结果，而不是使用Thread.wait()或者Thread.sleep()来阻塞主线程。</li>
+<li>Activity的onCreate和onResume回调中尽量避免耗时的代码</li>
+<li>BroadcastReceiver中onReceive代码也要尽量减少耗时，建议使用IntentService处理。</li>
+</ul>
+<h2 id="画龙点睛"><a href="#画龙点睛" class="headerlink" title="画龙点睛"></a>画龙点睛</h2><p><strong>通常100到200毫秒就会让人察觉程序反应慢，为了更加提升响应，可以使用下面的几种方法</strong></p>
+<ul>
+<li>如果程序正在后台处理用户的输入，建议使用让用户得知进度，比如使用ProgressBar控件。</li>
+<li>程序启动时可以选择加上欢迎界面，避免让用户察觉卡顿。</li>
+<li>使用Systrace和TraceView找出影响响应的问题。</li>
+</ul>
+<h2 id="如何定位"><a href="#如何定位" class="headerlink" title="如何定位"></a>如何定位</h2><p>如果开发机器上出现问题，我们可以通过查看/data/anr/traces.txt即可，最新的ANR信息在最开始部分。我们从stacktrace中即可找到出问题的具体行数。</p>
 
       
     </div>
@@ -300,13 +321,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/05/19/ClassLoader/" rel="next" title="ClassLoader">
+                <i class="fa fa-chevron-left"></i> ClassLoader
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/19/ClassLoader/" rel="prev" title="ClassLoader">
-                ClassLoader <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -406,7 +427,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是ANR"><span class="nav-number">1.</span> <span class="nav-text">什么是ANR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出现场景"><span class="nav-number">2.</span> <span class="nav-text">出现场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免"><span class="nav-number">3.</span> <span class="nav-text">如何避免</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#画龙点睛"><span class="nav-number">4.</span> <span class="nav-text">画龙点睛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何定位"><span class="nav-number">5.</span> <span class="nav-text">如何定位</span></a></li></ol></div>
             
           </div>
         </section>
