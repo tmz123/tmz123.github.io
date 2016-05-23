@@ -84,16 +84,22 @@
 
 
 
-<meta name="description" content="众所周知的是，ClassLoader负责将Class加载到JVM中。除此之外还有审查每个类应该由谁来加载的功能，其次将Class字节码重新解析成JVM统一要求的对象格式">
+<meta name="description" content="1)  从程序设计语言的理论上:局部内部类(即:定义在方法中的内部类),由于本身就是在方法内部(可出现在形式参数定义处或者方法体处),因而访问方法中的局部变量(形式参数或局部变量)是天经地义的.是很自然的
+2)  为什么JAVA中要加上一条限制:只能访问final型的局部变量?
+3)  JAVA语言的编译程序的设计者当然全实现:局部内部类能访问方法中的所有的局部变量(因为:从理论上这是很自然的要求">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ClassLoader">
-<meta property="og:url" content="http://yoursite.com/2016/05/19/ClassLoader/index.html">
+<meta property="og:title" content="为什么匿名内部类参数必须是final类型">
+<meta property="og:url" content="http://yoursite.com/2016/05/23/为什么匿名内部类参数必须是final类型/index.html">
 <meta property="og:site_name" content="tmz_try`s Blog">
-<meta property="og:description" content="众所周知的是，ClassLoader负责将Class加载到JVM中。除此之外还有审查每个类应该由谁来加载的功能，其次将Class字节码重新解析成JVM统一要求的对象格式">
-<meta property="og:updated_time" content="2016-05-19T01:29:31.628Z">
+<meta property="og:description" content="1)  从程序设计语言的理论上:局部内部类(即:定义在方法中的内部类),由于本身就是在方法内部(可出现在形式参数定义处或者方法体处),因而访问方法中的局部变量(形式参数或局部变量)是天经地义的.是很自然的
+2)  为什么JAVA中要加上一条限制:只能访问final型的局部变量?
+3)  JAVA语言的编译程序的设计者当然全实现:局部内部类能访问方法中的所有的局部变量(因为:从理论上这是很自然的要求">
+<meta property="og:updated_time" content="2016-05-23T09:41:24.976Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ClassLoader">
-<meta name="twitter:description" content="众所周知的是，ClassLoader负责将Class加载到JVM中。除此之外还有审查每个类应该由谁来加载的功能，其次将Class字节码重新解析成JVM统一要求的对象格式">
+<meta name="twitter:title" content="为什么匿名内部类参数必须是final类型">
+<meta name="twitter:description" content="1)  从程序设计语言的理论上:局部内部类(即:定义在方法中的内部类),由于本身就是在方法内部(可出现在形式参数定义处或者方法体处),因而访问方法中的局部变量(形式参数或局部变量)是天经地义的.是很自然的
+2)  为什么JAVA中要加上一条限制:只能访问final型的局部变量?
+3)  JAVA语言的编译程序的设计者当然全实现:局部内部类能访问方法中的所有的局部变量(因为:从理论上这是很自然的要求">
 
 
 
@@ -111,7 +117,7 @@
   };
 </script>
 
-  <title> ClassLoader | tmz_try`s Blog </title>
+  <title> 为什么匿名内部类参数必须是final类型 | tmz_try`s Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -221,7 +227,7 @@
             
             
               
-                ClassLoader
+                为什么匿名内部类参数必须是final类型
               
             
           </h1>
@@ -233,8 +239,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-05-19T08:40:05+08:00" content="2016-05-19">
-              2016-05-19
+            <time itemprop="dateCreated" datetime="2016-05-23T17:34:32+08:00" content="2016-05-23">
+              2016-05-23
             </time>
           </span>
 
@@ -266,42 +272,37 @@
       
 
       
-        <p>众所周知的是，ClassLoader负责将Class加载到JVM中。除此之外还有审查每个类应该由谁来加载的功能，其次将Class字节码重新解析成JVM统一要求的对象格式</p>
-<a id="more"></a>
-<h3 id="ClassLoader的等级加载制度"><a href="#ClassLoader的等级加载制度" class="headerlink" title="ClassLoader的等级加载制度"></a>ClassLoader的等级加载制度</h3><ol>
-<li>先判断自己是否加载过，如果加载过就会拒绝服务，如果没有接待过就会向上询问是否被更高一级接待过</li>
-<li>上级会根据自己的接待原则检查这个会员是否被接待过，如果接待过就会拒绝再次接待，同时将已经接待过的结果反馈给下一级；如果没有接待过的话就会再向更高一级的询问.更高一级也是同样的处理办法。直到有一级接待或者告诉下一级这个会员不是自己接待。</li>
-</ol>
-<h3 id="三种ClassLoader"><a href="#三种ClassLoader" class="headerlink" title="三种ClassLoader"></a>三种ClassLoader</h3><ul>
-<li>Bootstrap ClassLoader 启动类加载器 :这个加载器就是为接待室自己本身服务的。他是JVM系统控制的，仅仅是系统类的加载工具而已</li>
-<li>ExtClassLoader 标准扩展类加载器 :是JVM本身的一部分，可是又不是JVM亲自实现的，也和普通的外部会员不同</li>
-<li>AppClassLoader 系统类加载器 :专门为会员服务的</li>
-</ul>
-<h3 id="JVM加载class文件到内存中的方式"><a href="#JVM加载class文件到内存中的方式" class="headerlink" title="JVM加载class文件到内存中的方式"></a>JVM加载class文件到内存中的方式</h3><ul>
-<li><strong>隐式加载</strong>：不通过代码里调用而是通过JVM来自动加载需要的类到内存的方式。例如继承某个类的时候，JVM会解析当前这个类时发现引用的类 不在内存中就会自动的将这些类加载到内存中。</li>
-<li><strong>显示加载</strong>：在代码中通过调用ClassLoader类来加载一个类的方式。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.getClass.getClassLoader.loadClass().Class.forName();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="如何加载class文件"><a href="#如何加载class文件" class="headerlink" title="如何加载class文件"></a>如何加载class文件</h3><ol>
-<li>加载：实现抽象类ClassLoader中的findClass方法去找到.class文件并把这个文件包含的字节码加载到内存中，再调用defineClass方法来创建类对象</li>
-<li>验证：字节码验证，确保符合JVM规范</li>
-<li>准备：准备代表每个类中定义的字段，方法和实现接口所必需的数据结构</li>
-<li>解析：类装入器就会装入所引用的其他所有类</li>
-<li>初始化：类中的静态属性和初始化赋值以及静态块的执行</li>
-</ol>
-<h3 id="JVM的作用"><a href="#JVM的作用" class="headerlink" title="JVM的作用"></a>JVM的作用</h3><p>JVM能够跨计算机体系结构执行java字节码主要是由于JVM屏蔽了与各个计算机平台xiang关的软件或者硬件之间的差异，使得与平台相关的耦合统一有JVM提供者来实现。</p>
-<h3 id="指令集与汇编语言"><a href="#指令集与汇编语言" class="headerlink" title="指令集与汇编语言"></a>指令集与汇编语言</h3><p>指令集就是可以直接被机器识别的机器码，也就是它必须是以二进制格式存在与计算机中的，而汇编语言是能够被人识别的指令，汇编语言就是为了能让人能够更容易地记住机器指令而使用的助记符。</p>
-<h3 id="JVM与实体机有什么不同"><a href="#JVM与实体机有什么不同" class="headerlink" title="JVM与实体机有什么不同"></a>JVM与实体机有什么不同</h3><ul>
-<li>一个抽象规范：这个规范约束了JVM到底是什么？它的组成成分</li>
-<li>一个具体的实现：就是不同的厂商按照这个抽象的规范用软件在不同平台上的具体的实现</li>
-<li>一个运行中的实例：当运行一个Java程序的时候，它就是一个JVM实例</li>
-</ul>
-<h3 id="JVM体系结构详解"><a href="#JVM体系结构详解" class="headerlink" title="JVM体系结构详解"></a>JVM体系结构详解</h3><ol>
-<li>类加载器：在启动的时候会将class文件加载到内存中</li>
-<li>执行引擎：相当于CPU，负责执行class文件中包含的字节码指令</li>
-<li>内存区：模拟计算机中的存储，记录和调度模块</li>
-<li>本地方法区：调用C/C++实现的本地方法的代码返回结果</li>
-</ol>
+        <p>1)  从程序设计语言的理论上:局部内部类(即:定义在方法中的内部类),由于本身就是在方法内部(可出现在形式参数定义处或者方法体处),因而访问方法中的局部变量(形式参数或局部变量)是天经地义的.是很自然的</p>
+<p>2)  为什么JAVA中要加上一条限制:只能访问final型的局部变量?</p>
+<p>3)  JAVA语言的编译程序的设计者当然全实现:局部内部类能访问方法中的所有的局部变量(因为:从理论上这是很自然的要求),但是:编译技术是无法实现的或代价极高.</p>
+<p>4)  困难在何处?到底难在哪儿?<br>     <strong>局部变量的生命周期与局部内部类的对象的生命周期的不一致性!</strong></p>
+<p>5)  设方法f被调用,从而在它的调用栈中生成了变量i,此时产生了一个局部内部类对象inner_object,它访问了该局部变量i .当方法f()运行结束后,局部变量i就已死亡了,不存在了.但:局部内部类对象inner_object还可能   一直存在(只能没有人再引用该对象时,它才会死亡),它不会随着方法f()运行结束死亡.这时:出现了一个”荒唐”结果:局部内部类对象 inner_object要访问一个已不存在的局部变量i!</p>
+<p>6)  如何才能实现?当变量是final时,通过将final局部变量”复制”一份,复制品直接作为局部内部中的数据成员.这样:当局部内部类访问局部变量 时,其实真正访问的是这个局部变量的”复制品”(即:这个复制品就代表了那个局部变量).因此:当运行栈中的真正的局部变量死亡时,局部内部类对象仍可以 访问局部变量(其实访问的是”复制品”),给人的感觉:好像是局部变量的”生命期”延长了.</p>
+<p>那么:核心的问题是:怎么才能使得:访问”复制品”与访问真正的原始的局部变量,其语义效果是一样的呢?<br>当变量是final时,若是基本数据类型,由于其值不变,因而:其复制品与原始的量是一样.语义效果相同.(若:不是final,就无法保证:复制品与原始变量保持一致了,因为:在方法中改的是原始变量,而局部内部类中改的是复制品) </p>
+<p>当 变量是final时,若是引用类型,由于其引用值不变(即:永远指向同一个对象),因而:其复制品与原始的引用变量一样,永远指向同一个对象(由于是 final,从而保证:只能指向这个对象,再不能指向其它对象),达到:局部内部类中访问的复制品与方法代码中访问的原始对象,永远都是同一个即:语义效 果是一样的.否则:当方法中改原始变量,而局部内部类中改复制品时,就无法保证:复制品与原始变量保持一致了(因此:它们原本就应该是同一个变量.) </p>
+<p>一句话:这个规定是一种无可奈何.也说明:程序设计语言的设计是受到实现技术的限制的.这就是一例. 因为:我就看到不少人都持这种观点:设计与想法是最重要的,实现的技术是无关紧要的,只要你作出设计与规定,都能实现.</p>
+<p>现在我们来看,如果我要实现一个在一个方法中匿名调用ABSClass的例子： </p>
+<p>` public static void test(final String s){<br>     //或final String s = “axman”;<br>  ABSClass c = new ABSClass(){<br>   public void m(){<br>      int x = s.hashCode();</p>
+<pre><code>System.out.println(x);
+</code></pre><p>   }<br>  };<br>  //其它代码.<br> }`</p>
+<p> 从代码上看，在一个方法内部定义的内部类的方 法访问外部方法内局部变量或方法参数，是非常自然的事，但内部类编译的时候如何获取这个变量，因为内部类除了它的生命周期是在方法内部，其它的方面它就是 一个普通类。那么它外面的那个局部变量或方法参数怎么被内部类访问？编译器在实现时实际上是这样的：</p>
+<p>  `public static void test(final String s){<br>     //或final String s = “axman”;</p>
+<p>  class OuterClass$1 extends ABSClass{</p>
+<p>   private final String s;<br>   public OuterClass$1(String s){<br>      this.s = s;<br>   }<br>   public void m(){<br>      int x = s.hashCode();<br>      System.out.println(x);<br>   }<br>  };<br>  ABSClass c = new OuterClass$1(s);<br>  //其它代码.<br> }`</p>
+<p>即外部类的变量被作为构造方法的参数传给了内部类的私有成员.<br>假如没有final,那么:<br> `public static void test(String s){<br>     //或String s = “axman”;<br>  ABSClass c = new ABSClass(){<br>   public void m(){<br>     s = “other”;<br>   }<br>  };<br>  System.out.println(s);<br> }<br> 就会编译成:<br>  public static void test(String s){<br>     //或String s = “axman”;<br>  class OuterClass$1 extends ABSClass{</p>
+<p>   private String s;<br>   public OuterClass$1(String s){<br>      this.s = s;<br>   }<br>   public void m(){<br>     s = “other”;</p>
+<p>   }<br>  }; </p>
+<p>   ABSClass c = new OuterClass$1 (s);<br>  }`</p>
+<p> 内部类的s重新指向”other”并不影响test的参数或外部定义的那个s.同理如果外部的s重新赋值内部类的s也不会跟着改变。<br> 而你看到的<br><code>public static void test(String s){ 
+     //或String s = &quot;axman&quot;; 
+  ABSClass c = new ABSClass(){ 
+   public void m(){ 
+     s = &quot;other&quot;; 
+   } 
+  }; 
+  System.out.println(s); 
+ }</code></p>
+<p> 在语法上是一个s,在内部类中被改变了,但结果打印的出来的你认为是同一的s却还是原来的”axman”,<br> 你能接收这样的结果吗?<br> 所以final从语法上约束了实际上两个不同变量的一致性(表现为同一变量).s</p>
 
       
     </div>
@@ -326,17 +327,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/18/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/05/19/Android-Exit-Mode/" rel="next" title="Android Exit Mode">
+                <i class="fa fa-chevron-left"></i> Android Exit Mode
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/19/Android-ANR/" rel="prev" title="Android ANR">
-                Android ANR <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -436,7 +433,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassLoader的等级加载制度"><span class="nav-number">1.</span> <span class="nav-text">ClassLoader的等级加载制度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三种ClassLoader"><span class="nav-number">2.</span> <span class="nav-text">三种ClassLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM加载class文件到内存中的方式"><span class="nav-number">3.</span> <span class="nav-text">JVM加载class文件到内存中的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何加载class文件"><span class="nav-number">4.</span> <span class="nav-text">如何加载class文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM的作用"><span class="nav-number">5.</span> <span class="nav-text">JVM的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令集与汇编语言"><span class="nav-number">6.</span> <span class="nav-text">指令集与汇编语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM与实体机有什么不同"><span class="nav-number">7.</span> <span class="nav-text">JVM与实体机有什么不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM体系结构详解"><span class="nav-number">8.</span> <span class="nav-text">JVM体系结构详解</span></a></li></ol></div>
+              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
             
           </div>
         </section>
