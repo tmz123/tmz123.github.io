@@ -84,29 +84,20 @@
 
 
 
-<meta name="description" content="#1. HashMap的数据结构数据结构中有数组和链表来实现对数据的存储，但这两者基本上是两个极端。
- 数组和链表的区别主要体现在以下几个方面：
-
-逻辑结构：数组必须事先定义固定的长度（元素个数），不能适应数据动态地递增的情况，即在使用数组之前，就必须对数组的大小进行确定。当数据增加时，可能超出原来定义的元素个数；当数据减少时，造成内存浪费。数组中插入、删除数据项时，需要移动其他数据项。而链表采用">
+<meta name="description" content="HashMap不管是在实际开发过程中还是在求职的过程中，用到的可能性都是非常大的。这里很有必要对HashMap的实现原理进行一个解析。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap的实现原理">
 <meta property="og:url" content="http://yoursite.com/2016/05/26/HashMap的实现原理/index.html">
 <meta property="og:site_name" content="tmz_try`s Blog">
-<meta property="og:description" content="#1. HashMap的数据结构数据结构中有数组和链表来实现对数据的存储，但这两者基本上是两个极端。
- 数组和链表的区别主要体现在以下几个方面：
-
-逻辑结构：数组必须事先定义固定的长度（元素个数），不能适应数据动态地递增的情况，即在使用数组之前，就必须对数组的大小进行确定。当数据增加时，可能超出原来定义的元素个数；当数据减少时，造成内存浪费。数组中插入、删除数据项时，需要移动其他数据项。而链表采用">
+<meta property="og:description" content="HashMap不管是在实际开发过程中还是在求职的过程中，用到的可能性都是非常大的。这里很有必要对HashMap的实现原理进行一个解析。">
 <meta property="og:image" content="http://img.blog.csdn.net/20160507210454109">
 <meta property="og:image" content="http://img.blog.csdn.net/20160507210540326">
 <meta property="og:image" content="http://img.blog.csdn.net/20160508100937321">
 <meta property="og:image" content="http://img.blog.csdn.net/20160508101428698">
-<meta property="og:updated_time" content="2016-05-26T13:27:39.121Z">
+<meta property="og:updated_time" content="2016-05-26T13:31:16.839Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap的实现原理">
-<meta name="twitter:description" content="#1. HashMap的数据结构数据结构中有数组和链表来实现对数据的存储，但这两者基本上是两个极端。
- 数组和链表的区别主要体现在以下几个方面：
-
-逻辑结构：数组必须事先定义固定的长度（元素个数），不能适应数据动态地递增的情况，即在使用数组之前，就必须对数组的大小进行确定。当数据增加时，可能超出原来定义的元素个数；当数据减少时，造成内存浪费。数组中插入、删除数据项时，需要移动其他数据项。而链表采用">
+<meta name="twitter:description" content="HashMap不管是在实际开发过程中还是在求职的过程中，用到的可能性都是非常大的。这里很有必要对HashMap的实现原理进行一个解析。">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160507210454109">
 
 
@@ -280,7 +271,9 @@
       
 
       
-        <h2 id="1-HashMap的数据结构"><a href="#1-HashMap的数据结构" class="headerlink" title="#1. HashMap的数据结构"></a>#1. HashMap的数据结构</h2><p>数据结构中有数组和链表来实现对数据的存储，但这两者基本上是两个极端。</p>
+        <p>HashMap不管是在实际开发过程中还是在求职的过程中，用到的可能性都是非常大的。这里很有必要对HashMap的实现原理进行一个解析。</p>
+<a id="more"></a>
+<h2 id="1-HashMap的数据结构"><a href="#1-HashMap的数据结构" class="headerlink" title="#1. HashMap的数据结构"></a>#1. HashMap的数据结构</h2><p>数据结构中有数组和链表来实现对数据的存储，但这两者基本上是两个极端。</p>
 <p> 数组和链表的区别主要体现在以下几个方面：</p>
 <ol>
 <li>逻辑结构：数组必须事先定义固定的长度（元素个数），不能适应数据动态地递增的情况，即在使用数组之前，就必须对数组的大小进行确定。当数据增加时，可能超出原来定义的元素个数；当数据减少时，造成内存浪费。数组中插入、删除数据项时，需要移动其他数据项。而链表采用动态分配内存的形式实现，可以适应数据动态递增的情况，需要时可以用new/malloc分配内存空间，不需要时用delete/free将已经分配的空间释放，不会造成内存空间的浪费，且可以方便的插入、删除数据项。</li>
