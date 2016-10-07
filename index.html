@@ -170,7 +170,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -180,7 +180,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -246,7 +246,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-26T21:19:08+08:00" content="2016-05-26">
               2016-05-26
             </time>
@@ -284,7 +284,7 @@
           <p>HashMap不管是在实际开发过程中还是在求职的过程中，用到的可能性都是非常大的。这里很有必要对HashMap的实现原理进行一个解析。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/26/HashMap的实现原理/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -347,7 +347,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-23T17:34:32+08:00" content="2016-05-23">
               2016-05-23
             </time>
@@ -385,7 +385,7 @@
           <p>为什么匿名内部类参数必须是final类型呢？这个在实际应用中大家可能都遇到过了，但是是否真的明白这样做的原因呢？这里就给大家做一个解释。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/23/为什么匿名内部类参数必须是final类型/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -448,7 +448,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-19T22:13:04+08:00" content="2016-05-19">
               2016-05-19
             </time>
@@ -486,7 +486,7 @@
           <p>对于Android的退出方式，经常用的就以为是最好的，后来一直在用。现在才知道是有问题的，特地查找资料，记录下来。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/19/Android-Exit-Mode/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -549,7 +549,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-19T20:50:30+08:00" content="2016-05-19">
               2016-05-19
             </time>
@@ -587,7 +587,7 @@
           <p>Context相信所有的Android开发人员基本上每天都在接触，因为它太常见了。我们知道，Android应用都是使用Java语言来编写的，那么大家可以思考一下，一个Android程序和一个Java程序，他们最大的区别在哪里？划分界限又是什么呢？其实简单点分析，Android程序不像Java程序一样，随便创建一个类，写个main()方法就能跑了，而是要有一个完整的Android工程环境，在这个环境下，我们有像Activity、Service、BroadcastReceiver等系统组件，而这些组件并不是像一个普通的Java对象new一下就能创建实例的了，而是要有它们各自的上下文环境，也就是我们这里讨论的Context。可以这样讲，<strong>Context是维持Android程序中各组件能够正常工作的一个核心功能类。</strong></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/19/Android-Context/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -650,7 +650,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-19T12:32:23+08:00" content="2016-05-19">
               2016-05-19
             </time>
@@ -688,7 +688,7 @@
           <p>Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQueue和Looper的支撑。MessageQueue就是我们常说的消息队列，它的内部存储了一组消息，虽然叫做消息队列，但是它的内部却是采用单链表的数据结构来存储消息列表的。Looper为消息循环，由于MessageQueue只是一个消息的存储单元，它不能去处理消息，而Looper填补了这个功能，Looper会以无限循环的形式去查找是否有新消息，如果有就处理，如果没有就会等待。我们都知道Handler的创建是需要Looper的，也就是说Handler创建的时候会采用当前线程的Looper来构造消息循环系统。那么Handler内部是如何获取当前线程的Looper的呢?这就要使用到ThreadLocal了，它可以在不同的线程中互不干扰地存储和读取数据，通过ThreadLocal可以轻松获取每个线程的Looper。<br>下面的几个小节我们会围绕ThreadLocal、MessageQueue、Looper和Handler来阐述Android的消息机制。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/19/Android-Handler/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -751,7 +751,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-19T12:11:25+08:00" content="2016-05-19">
               2016-05-19
             </time>
@@ -789,7 +789,7 @@
           <p>有过Android开发经历的人都不会对ANR陌生，它和崩溃一样是程序设计的问题。本文将以较为深入的视角来介绍什么是ANR，出现场景，如何避免以及如何定位分析ANR,希望可以帮助大家在编写程序时有所帮助。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/19/Android-ANR/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -852,7 +852,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-19T08:40:05+08:00" content="2016-05-19">
               2016-05-19
             </time>
@@ -890,7 +890,7 @@
           <p>众所周知的是，ClassLoader负责将Class加载到JVM中。除此之外还有审查每个类应该由谁来加载的功能，其次将Class字节码重新解析成JVM统一要求的对象格式</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/19/ClassLoader/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -953,7 +953,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-05-18T23:09:14+08:00" content="2016-05-18">
               2016-05-18
             </time>
@@ -991,7 +991,7 @@
           <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/18/hello-world/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -1062,7 +1062,7 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
@@ -1117,7 +1117,7 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
